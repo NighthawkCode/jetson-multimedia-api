@@ -27,26 +27,21 @@
 # - Try to find the NVIDIA Tegra Multimedia API
 # Once done this will define
 #  NVMMAPI_FOUND - System has NVMMAPI
-#  NVMMAPI_INCLUDE_DIRS - The NVMMAPI include directories
 #  NVMMAPI_LIBRARIES - The libraries needed to use the NVMMAPI
 #  NVMMAPI_DEFINITIONS - Compiler switches required for using NVMMAPI
 
 find_package(PkgConfig)
 
-find_path(NVMMAPI_INCLUDE_DIR nvbuf_utils.h
-          HINTS /usr/src/jetson_multimedia_api/include)
-
 find_library(NVMMAPI_LIBRARY NAMES nvbuf_utils
              HINTS /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/tegra)
 
 set(NVMMAPI_LIBRARIES ${NVMMAPI_LIBRARY})
-set(NVMMAPI_INCLUDE_DIRS ${NVMMAPI_INCLUDE_DIR})
 set(NVMMAPI_DEFINITIONS -DNVMMAPI_SUPPORTED)
 
 include(FindPackageHandleStandardArgs)
 # handle the QUIETLY and REQUIRED arguments and set NVMMAPI_FOUND to TRUE
 # if all listed variables are TRUE
 find_package_handle_standard_args(NVMMAPI DEFAULT_MSG
-                                  NVMMAPI_LIBRARY NVMMAPI_INCLUDE_DIR)
+                                  NVMMAPI_LIBRARY)
 
-mark_as_advanced(NVMMAPI_INCLUDE_DIR NVMMAPI_LIBRARY)
+mark_as_advanced(NVMMAPI_LIBRARY)

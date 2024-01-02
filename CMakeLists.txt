@@ -20,6 +20,9 @@ add_library(
   src/NvApplicationProfiler.cpp
   src/NvBuffer.cpp
   src/NvBufSurface.cpp
+  # Remove the GUI rendering, simplifying dependencies
+  # src/NvDrmRenderer.cpp
+  # src/NvEglRenderer.cpp
   src/NvElement.cpp
   src/NvElementProfiler.cpp
   src/NvJpegDecoder.cpp
@@ -28,12 +31,10 @@ add_library(
   src/NvUtils.cpp
   src/NvV4l2Element.cpp
   src/NvV4l2ElementPlane.cpp
-  src/NvVideoConverter.cpp
   src/NvVideoDecoder.cpp
   src/NvVideoEncoder.cpp)
 target_include_directories(jetson-multimedia-api SYSTEM PUBLIC include)
 target_include_directories(jetson-multimedia-api SYSTEM PUBLIC include/libjpeg-8b)
-target_include_directories(jetson-multimedia-api SYSTEM PUBLIC ${NVMMAPI_INCLUDE_DIR})
 target_link_libraries(jetson-multimedia-api PUBLIC ${NVMMAPI_LIBRARIES} pthread EGL)
 target_link_libraries(jetson-multimedia-api PRIVATE /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/tegra/libnvv4l2.so)
 target_link_libraries(jetson-multimedia-api PRIVATE /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/tegra/libnvbufsurface.so)
